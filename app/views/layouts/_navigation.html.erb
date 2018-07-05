@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Allergen-Check", root_path, class: "navbar-brand", id:"logo" %>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li id="link-desc"><%= link_to "List All Allergens", root_path %></li>
+        <li id="link-desc"><%= link_to "List All Products", products_path %></li>
+        <li id="link-desc"><%= link_to "Add an Allergen", new_allergen_path %></li>
+        <li id="link-desc"><%= link_to "Add a Product", new_product_path %></li>
+      </ul>
+      <!--  Search -->
+      <%= form_tag(search_search_path, :method => "get",   
+          class: 'navbar-form navbar-right') do %>  
+        <div class="input-group">  
+          <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
+          <div class="input-group-btn">  
+            <%= button_tag "", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+          </div>  
+        </div>  
+      <% end %>
+      <!--  -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

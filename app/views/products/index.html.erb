@@ -1,0 +1,16 @@
+<h1 class="center-heading">Products</h1>
+<table class="table">
+  <tr colspan="3">
+    <th>Product</th>
+    <th class='center'>Ingredients</th>
+    <th class='center' colspan="3">Actions</th>
+  </tr>
+  <%= render partial: 'shared/product', collection: Product.all, :locals => {index_view: true}  %>
+</table>
+
+<div class="center product-actions">
+  <%= link_to "Create New Product", new_product_path, class: "btn btn-lg btn-primary" %>
+</div>
+<br>
+<br>
+

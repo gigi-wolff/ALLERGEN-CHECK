@@ -1,0 +1,34 @@
+<h1 class="center-heading"><strong>Search Results:  <%= @search_item %></strong></h1>
+<% if @search_item.blank? %>
+  <div class="panel-danger">
+    <div class="panel-heading">
+      <h1 class="panel-title center">
+        Empty Search Field
+      </h1>
+    </div>
+  </div>
+<% else %>
+  <% allergen_search_results = search_all_allergens(@search_item) %>
+  <% product_search_results = search_all_products(@search_item) %>
+  <% unless product_search_results.empty? %>
+    <table class="table">
+      <tr colspan="2">
+        <th>Product</th>
+        <th class='center'>Ingredients</th>
+      </tr>
+      <%= render partial: "shared/product", collection: product_search_results, :locals => {:index_view => false, search_item: @search_item}  %>
+    </table>
+  <% end %>
+  <% unless allergen_search_results.empty? %>
+    <%= render partial: "shared/allergen", collection: allergen_search_results, :locals => {index_view: false, search_item: @search_item}  %>
+  <% end %>
+
+  <!-- Search item not found in Product and Allergen db -->
+  <% if allergen_search_results.nil? && product_search_results.nil? %>
+    <div class="panel-info">
+      <div class="panel-heading">
+        <h1 class="panel-title center"><%= @search_item %> Not Found</h1>
+      </div>
+    </div>
+  <% end %>
+<% end %>

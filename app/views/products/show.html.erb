@@ -1,0 +1,78 @@
+<div class="well col-xs-8 col-xs-offset-2">
+  <h3 class="center-heading"><strong><%= @product.name %></strong></h3>
+
+  <hr>
+  <table class="size-chars">
+    <tr>
+    </tr>
+    <!-- Check if product's ingredients cause an allergic reaction -->
+    <% product_reactions = Reaction.where("product_id = ?", @product.id) %>
+
+    <!-- if product contains NO ALLERGENS -->
+    <% if product_reactions.empty? %>
+      <h5 class="center-heading text-color-ok"><strong>Ingredients: Contain No Allergens</strong></h5>
+      <% process_ingredients_string(@product.ingredients).each do |current_ingredient| %>  
+        <tr>
+          <td class="add-padding text-color-ok show-td"><%= current_ingredient %></td>
+          <td></td>
+        </tr>
+      <% end %>
+
+    <!-- else product CONTAINS ALLERGENS -->
+    <% else %>
+      <h5 class="center-heading text-color-not-ok"><strong>Ingredients: Contain Allergens</strong></h5>
+      <!-- display each product ingredient -->
+      <% process_ingredients_string(@product.ingredients).each do |current_ingredient| %>  
+        <!-- check if ingredient for this product is in Reaction db -->
+        <% causes_reaction = product_reactions.where("reactive_ingredient = ?", current_ingredient.upcase) %>
+        <!-- if ingredient causes reaction -->
+        <% if !causes_reaction.empty? %>
+          <tr>
+            <td class="add-padding text-color-not-ok show-td">
+              <%= current_ingredient %>
+            </td>
+            <td class="add-padding text-color-not-ok show-td">
+              <div class="alert alert-danger" role="alert">
+                <h6 class="center"><strong><u><%= current_ingredient %> Allergens</u></strong></h6>
+                <!-- display allergen category and substances which match ingredient -->
+                <ol class="list">
+                  <% causes_reaction.pluck(:allergen_id, :reactive_substances).each do |item| %>
+                    <% category = Allergen.find(item[0]).category %>
+                    <% substances = item[1].split(';') %>
+                      <li><strong><%= category %></strong></li>
+                      <ul class="list">
+                      <% substances.each do |substance| %>
+                        <% highlight_ingredient = substance.upcase.partition(current_ingredient.upcase) %>
+                        <% if (highlight_ingredient[1]=="") then %>
+                          <li><strong class="mark"><%= highlight_ingredient[0] %></strong><%= highlight_ingredient[1] %>
+                          <%= highlight_ingredient[2] %></li>
+                        <% else (highlight_ingredient[1]!="") %>
+                            <li><%= highlight_ingredient[0] %><strong class="mark"><%= highlight_ingredient[1] %></strong>
+                          <%= highlight_ingredient[2] %></li>
+                        <% end %>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </ol>
+              </div>  
+            </td></h6>
+          </tr>
+        <% else %>
+        <!-- ingredient does not cause a reaction -->
+          <tr>
+            <td class="add-padding text-color-ok show-td"><%= current_ingredient %></td>
+            <td></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+  <br>
+  <div class="center product-actions">
+    <%= link_to "Edit this product", edit_product_path(@product), class: "btn btn-lg btn-primary" %>
+    <%= link_to "Delete this product", product_path(@product), method: :delete,
+      data: { confirm: "Are you sure you want to delete the product?"},
+      class: "btn btn-lg btn-danger" %>
+    <%= link_to "View all products", products_path, class: "btn btn-lg btn-success" %>
+  </div>
+<!-- </div>

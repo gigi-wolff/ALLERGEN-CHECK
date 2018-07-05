@@ -1,0 +1,12 @@
+<body>
+  <h1 class="center-heading"><strong>Allergens</strong></h1>
+  <div>
+    <% @allergens = Allergen.all %>
+    <%= render partial: "shared/allergen", collection: Allergen.all, :locals => {:index_view => true, :search_item => ""}  %>
+  </div>
+  <br>
+  <div class="center">
+    <%= link_to "Add New Allergen", new_allergen_path, class: "btn btn-lg btn-primary" %>
+  </div>
+  <br>
+</body>

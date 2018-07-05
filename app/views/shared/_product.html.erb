@@ -1,0 +1,21 @@
+<% product_reactions = Reaction.where("product_id = ?", product.id) %>
+<!-- for debugging... < % debug =1/0 % >  -->
+  <% if index_view %>
+    <tr>
+  <% else %>
+    <tr id="search_view">
+  <% end %>
+  <% if product_reactions.empty? %> <!-- product contains no allergens -->
+    <td class="text-color-ok"><%= product.name %></td>
+    <td class="text-color-ok"><%= product.ingredients %></td>
+  <% else %> <!-- product does contains allergens -->
+    <td class="text-color-not-ok"><%= product.name %></td>
+    <% search_item = product_reactions.select(:reactive_ingredient).distinct.pluck(:reactive_ingredient) %>
+    <td class="text-color-not-ok"><%= highlight(product.ingredients, search_item) %></td>
+  <% end %>
+  <% if index_view %>
+    <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    <td><%= link_to 'Show', product_path(product) %></td>
+    <td><%= link_to 'Delete', product_path(product), method: :delete, data: {confirm: "Are you sure?"} %></td>
+  <% end %>
+</tr>

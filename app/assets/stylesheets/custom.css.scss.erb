@@ -1,0 +1,55 @@
+$navbar-default-bg: #465f6e; /* color of navbar #708290 */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+/*@import url("whitespace-reset.css");*/
+
+* {
+  box-sizing: border-box;
+}
+
+#logo {
+  float: left;
+  font-size: 2.75em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  font-weight: bold;
+  /*background: transparent url(background-logo.jpg) 100% 100% no-repeat; */
+  background: transparent url(<%= asset_path 'background-logo.jpg'%>) 82% 92% no-repeat;  
+}
+
+#link-desc > a {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: white;
+}
+
+#link-desc a:hover {
+  cursor: pointer;
+  background-color: #839cab;
+}
+
+.center-heading {
+  text-align: center;
+  font-size: 1.7em;
+  color: #00334d;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+  clear: left;
+}
+
+mark {
+  background-color: #e8e893;
+  color: #800000;
+}
+
+#search_view {
+  pointer-events: none;
+}
+

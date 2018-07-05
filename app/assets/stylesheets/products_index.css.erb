@@ -1,0 +1,37 @@
+
+table, th, tr {
+  margin: auto;
+  border: 1px solid #9fbfdf;
+}
+
+tr:nth-child(even) {
+  background-color: #ecf2f9;
+}
+
+tr:nth-child(odd) {
+  background-color: #d9e6f2;
+}
+
+/* does not apply to first row */
+tr:not(:first-child):hover{
+  border: 2px solid #7e97b1
+}
+
+.text-color-ok {
+  color: green;
+  font-weight: bold;
+}
+
+.text-color-not-ok {
+  color: #800000;
+  font-weight: bold;
+}
+
+#background-ok {
+  color: #e8eee7;
+}
+
+#background-not-ok {
+  color: #f8f0ed;
+}
+
