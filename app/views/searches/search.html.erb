@@ -10,6 +10,8 @@
 <% else %>
   <% allergen_search_results = search_all_allergens(@search_item) %>
   <% product_search_results = search_all_products(@search_item) %>
+      <%= allergen_search_results.first.category %>
+
   <% unless product_search_results.empty? %>
     <table class="table">
       <tr colspan="2">
@@ -20,7 +22,6 @@
     </table>
   <% end %>
   <% unless allergen_search_results.empty? %>
-    <%= allergen_search_results.first.category %>
     <%= render partial: "shared/allergen", collection: allergen_search_results, :locals => {index_view: false, search_item: @search_item}  %>
   <% end %>
 
