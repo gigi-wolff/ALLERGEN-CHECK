@@ -6,53 +6,25 @@ body {
   background-blend-mode: color;
 }
 
-#shadow {
+#panel,
+#show-panel {
+  display: block;
+  margin-left: 2%;
+  margin-bottom: 2%;
+  float: left;
   box-shadow: 4px 4px 1px 4px rgba(0, 0, 0, 0.3)
 }
 
-#index-panel-heading {
-  padding: 0px 0px;
-  background-color: #c8d7e4;
-  position: relative;
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-align: center;
-  line-height: 100px;
-  height: 100px; /* panel-body height + panel-heading height = panel-height */
-}
-
-#index-panel-button {
-  white-space: normal; /* make text in button wrap */
-}
-
-.panel-body {
-  height: 225px; /* panel-body height + panel-heading height = panel-height */
-  overflow-y:auto;
-  background-color: #e4edf5;
-  /*font-size: 1rem;*/
-  text-align: center;
-}
-
-.panel {
-  display: block;
+#panel {
   height: 325px; /* panel-body height + panel-heading height = panel-height */
   width: 30%;
-  margin-left: 2%;
-  float: left;
 }
 
-#shrink {
-  /*width: 100%;*/
-  -webkit-transform:scale(0.7);
-  -moz-transform:scale(0.7);
-  -ms-transform:scale(0.7);
-  transform:scale(0.7);
-}
-
-.show-panel {
+#show-panel {
   width: 100%;
 }
 
+#index-panel-heading,
 #show-panel-heading {
   padding: 0px 0px;
   background-color: #c8d7e4;
@@ -60,15 +32,47 @@ body {
   font-size: 1.6rem;
   font-weight: bold;
   text-align: center;
+}
+
+#index-panel-heading {
+  line-height: 100px;
+  height: 100px; /* panel-body height + panel-heading height = panel-height */
+}
+
+#show-panel-heading {
   line-height: normal;
   height: fit-content;
 }
 
-.show-panel-body { 
-  height: auto;
-  overflow-y:auto;
+#index-panel-button {
+  white-space: normal; /* make text in button wrap */
+}
+
+#panel-body,
+#show-panel-body {
   background-color: #e4edf5;
   text-align: center;
+}
+
+#panel-body {
+  height: 225px; /* panel-body height + panel-heading height = panel-height */
+  overflow-y:auto;
+}
+
+#show-panel-body { 
+  height: auto;
+}
+
+#shrink {
+  /*
+  -webkit-transform:scale(0.8);
+  -moz-transform:scale(0.8);
+  -ms-transform:scale(0.8);
+  transform:scale(0.8);
+  */
+  display: inline-grid;
+  margin: 1%;
+
 }
 
 .btn {
@@ -90,7 +94,7 @@ body {
 /*------------------*/
 @media (max-width: 768px) {
 
-  .panel {  
+  #panel {  
     width: 40%;
     float: left;
   }

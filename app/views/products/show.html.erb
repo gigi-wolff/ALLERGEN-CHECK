@@ -3,7 +3,7 @@
   <h3 class="center-heading"><strong><%= @product.name %></strong></h3>
 
   <hr>
-  <table class="size-chars-big">
+  <table>
     <tr>
     </tr>
     <!-- Check if product's ingredients cause an allergic reaction -->
@@ -34,7 +34,9 @@
             </td>
             <td class="add-padding color-not-ok">
               <% reactive_allergens = Allergen.find(ingredient_search_results.pluck(:allergen_id)) %>
+              <div id="middle-align">
               <%= render partial: 'shared/allergen', collection: reactive_allergens, :locals => {index_view: false, search_item: current_ingredient}  %>
+              <div>
             </td>
           </tr>
         <% else %>
