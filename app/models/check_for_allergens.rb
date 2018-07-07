@@ -13,8 +13,8 @@ def check_for_allergens(id_of_product)
   # test each ingredient
   product_ingredients.each do |ingredient|
     # look for each ingredient in allergen db
-    #reactive_allergens = Allergen.where "substances ILIKE ?", "%#{ingredient}%" #production
-    reactive_allergens = Allergen.where "substances LIKE ?", "%#{ingredient}%" #development
+    reactive_allergens = Allergen.where "substances ILIKE ?", "%#{ingredient}%" #production
+    #reactive_allergens = Allergen.where "substances LIKE ?", "%#{ingredient}%" #development
     # if ingredient matches allergens in db
     if !reactive_allergens.empty? 
       # check each allergen that the ingredient matches
