@@ -20,9 +20,8 @@
     </table>
   <% end %>
   <% unless allergen_search_results.empty? %>
-    <%= render partial: "shared/allergen", collection: allergen_search_results, :locals => {index_view: false, search_item: @search_item}  %>
+      <%= render partial: "shared/allergen", collection: allergen_search_results, :locals => {index_view: false, search_item: @search_item}  %>
   <% end %>
-
   <!-- Search item not found in Product and Allergen db -->
   <% if allergen_search_results.empty? && product_search_results.empty? %>
     <div class="panel-info">

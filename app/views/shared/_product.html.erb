@@ -1,18 +1,22 @@
 <% product_reactions = Reaction.where("product_id = ?", product.id) %>
 <!-- for debugging... < % debug =1/0 % >  -->
+  <tr id="<%= index_view ? '' : 'search_view' %>">
+
   <% if index_view %>
-    <tr>
-  <% else %>
-    <tr id="search_view">
+    <% if product_reactions.empty? %>
+      <% search_item = '' %>
+    <% else %>
+      <% search_item = product_reactions.select(:reactive_ingredient).distinct.pluck(:reactive_ingredient) %> 
+    <% end %>
   <% end %>
-  <% if product_reactions.empty? %> <!-- product contains no allergens -->
-    <td class="text-color-ok"><%= product.name %></td>
-    <td class="text-color-ok"><%= product.ingredients %></td>
-  <% else %> <!-- product does contains allergens -->
-    <td class="text-color-not-ok"><%= product.name %></td>
-    <% search_item = product_reactions.select(:reactive_ingredient).distinct.pluck(:reactive_ingredient) %>
-    <td class="text-color-not-ok"><%= highlight(product.ingredients, search_item) %></td>
-  <% end %>
+
+  <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
+    <%= product.name %>
+  </td>
+  <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
+    <%= highlight(product.ingredients, search_item) %>
+  </td>
+
   <% if index_view %>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
     <td><%= link_to 'Show', product_path(product) %></td>

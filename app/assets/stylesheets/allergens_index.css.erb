@@ -19,7 +19,6 @@ body {
   text-align: center;
   line-height: 100px;
   height: 100px; /* panel-body height + panel-heading height = panel-height */
-
 }
 
 #index-panel-button {
@@ -30,6 +29,7 @@ body {
   height: 225px; /* panel-body height + panel-heading height = panel-height */
   overflow-y:auto;
   background-color: #e4edf5;
+  /*font-size: 1rem;*/
   text-align: center;
 }
 
@@ -39,6 +39,36 @@ body {
   width: 30%;
   margin-left: 2%;
   float: left;
+}
+
+#shrink {
+  /*width: 100%;*/
+  -webkit-transform:scale(0.7);
+  -moz-transform:scale(0.7);
+  -ms-transform:scale(0.7);
+  transform:scale(0.7);
+}
+
+.show-panel {
+  width: 100%;
+}
+
+#show-panel-heading {
+  padding: 0px 0px;
+  background-color: #c8d7e4;
+  position: relative;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: normal;
+  height: fit-content;
+}
+
+.show-panel-body { 
+  height: auto;
+  overflow-y:auto;
+  background-color: #e4edf5;
+  text-align: center;
 }
 
 .btn {

@@ -1,6 +1,8 @@
 <% substances = allergen.substances.split(";") %>
-<div id="shadow" class="panel">
-  <div id="index-panel-heading" class="panel-heading">
+<div id="<%= index_view ? '' : 'shrink' %>" >
+<div id="shadow" class="<%= index_view ? 'panel' : 'show-panel' %>">
+  <div id="<%= index_view ? 'index-panel-heading' : 'show-panel-heading' %>" class="panel-heading">
+
     <div class="panel-title">
       <!-- Split button -->
       <div class="btn-group">
@@ -17,25 +19,26 @@
         <% else %>
           <div id = "search_view">
             <button type="button" id="index-panel-button" class="btn btn-primary"><%= allergen.category %></button>
-        </div>
+          </div>
         <% end %>
       </div>
       <!--  -->
     </div>
   </div>
-  <div class="panel-body">
-    <% substances.each do |substance| %>
+  <div class="<%= index_view ? 'panel-body' : 'show-panel-body' %>" >
+  <% substances.each do |substance| %>
+    <!-- if invoked from index.html display every substance in category -->
+    <% if index_view %> 
       <div class="substances text-color-not-ok">
-        <!-- if invoked from index.html display every substance in category -->
-        <% if index_view %> 
-          <%= substance %>
-        <!-- if invoked from search, display on search match substances in category -->
-        <% elsif substance.upcase.include?(search_item.upcase)%> 
-          <%= highlight(substance, search_item) %>
-        <% end %>
+        <%= substance %>
+      </div>
+    <!-- if invoked from search, display only substances in category that match search -->
+    <% elsif substance.upcase.include?(search_item.upcase)%> 
+      <div class="substances text-color-not-ok">
+        <%= highlight(substance, search_item) %> 
       </div> 
     <% end %>
+  <% end %>
   </div>
 </div>
-
-
+</div>

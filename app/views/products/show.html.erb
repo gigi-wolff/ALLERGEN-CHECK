@@ -1,8 +1,9 @@
-<div class="well col-xs-8 col-xs-offset-2">
+<!-- <div class="well col-xs-8 col-xs-offset-2"> -->
+<div>
   <h3 class="center-heading"><strong><%= @product.name %></strong></h3>
 
   <hr>
-  <table class="size-chars">
+  <table class="size-chars-big">
     <tr>
     </tr>
     <!-- Check if product's ingredients cause an allergic reaction -->
@@ -24,43 +25,22 @@
       <!-- display each product ingredient -->
       <% process_ingredients_string(@product.ingredients).each do |current_ingredient| %>  
         <!-- check if ingredient for this product is in Reaction db -->
-        <% causes_reaction = product_reactions.where("reactive_ingredient = ?", current_ingredient.upcase) %>
+        <% ingredient_search_results = search_all_reactions(current_ingredient) %>
         <!-- if ingredient causes reaction -->
-        <% if !causes_reaction.empty? %>
+        <% unless ingredient_search_results.empty? %>
           <tr>
-            <td class="add-padding text-color-not-ok show-td">
+            <td class="add-padding color-not-ok">
               <%= current_ingredient %>
             </td>
-            <td class="add-padding text-color-not-ok show-td">
-              <div class="alert alert-danger" role="alert">
-                <h6 class="center"><strong><u><%= current_ingredient %> Allergens</u></strong></h6>
-                <!-- display allergen category and substances which match ingredient -->
-                <ol class="list">
-                  <% causes_reaction.pluck(:allergen_id, :reactive_substances).each do |item| %>
-                    <% category = Allergen.find(item[0]).category %>
-                    <% substances = item[1].split(';') %>
-                      <li><strong><%= category %></strong></li>
-                      <ul class="list">
-                      <% substances.each do |substance| %>
-                        <% highlight_ingredient = substance.upcase.partition(current_ingredient.upcase) %>
-                        <% if (highlight_ingredient[1]=="") then %>
-                          <li><strong class="mark"><%= highlight_ingredient[0] %></strong><%= highlight_ingredient[1] %>
-                          <%= highlight_ingredient[2] %></li>
-                        <% else (highlight_ingredient[1]!="") %>
-                            <li><%= highlight_ingredient[0] %><strong class="mark"><%= highlight_ingredient[1] %></strong>
-                          <%= highlight_ingredient[2] %></li>
-                        <% end %>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </ol>
-              </div>  
-            </td></h6>
+            <td class="add-padding color-not-ok">
+              <% reactive_allergens = Allergen.find(ingredient_search_results.pluck(:allergen_id)) %>
+              <%= render partial: 'shared/allergen', collection: reactive_allergens, :locals => {index_view: false, search_item: current_ingredient}  %>
+            </td>
           </tr>
         <% else %>
         <!-- ingredient does not cause a reaction -->
           <tr>
-            <td class="add-padding text-color-ok show-td"><%= current_ingredient %></td>
+            <td class="add-padding text-color-ok"><%= current_ingredient %></td>
             <td></td>
           </tr>
         <% end %>
