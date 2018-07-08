@@ -11,7 +11,7 @@
   <% end %>
 
   <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
-    <%= product.name %>
+    <%= highlight(product.name, search_item) %>
   </td>
   <td class="<%= product_reactions.empty? ? 'text-color-ok' : 'text-color-not-ok' %>">
     <%= highlight(product.ingredients, search_item) %>
