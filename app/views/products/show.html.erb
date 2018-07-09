@@ -29,7 +29,7 @@
         <!-- if ingredient causes reaction -->
         <% unless ingredient_search_results.empty? %>
           <tr>
-            <td class="add-padding color-not-ok">
+            <td id="show-product-name" class="add-padding color-not-ok">
               <%= current_ingredient %>
             </td>
             <td class="add-padding color-not-ok">
@@ -42,7 +42,7 @@
         <% else %>
         <!-- ingredient does not cause a reaction -->
           <tr>
-            <td class="add-padding text-color-ok"><%= current_ingredient %></td>
+            <td id="show-product-name" class="add-padding text-color-ok"><%= current_ingredient %></td>
             <td></td>
           </tr>
         <% end %>

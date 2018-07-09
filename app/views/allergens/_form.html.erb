@@ -14,7 +14,7 @@ text_field can to be any attribute (column) or virtual attribute of the allergen
   <div class='col-xs-12'>
     <%= form_for(@allergen, :html => {class: "form-horizontal", role: "form"}) do |f| %>
       <div class="form-group">
-        <div class="control-label col-sm-2">
+        <div class="text-color-not-ok control-label col-sm-2">
           <%= f.label :category %>
         </div>
         <div class="col-sm-8">
@@ -22,7 +22,7 @@ text_field can to be any attribute (column) or virtual attribute of the allergen
         </div>
       </div>
       <div class="form-group">
-        <div class="control-label col-sm-2">
+        <div class="text-color-not-ok control-label col-sm-2">
             <%= f.label :substances %>
         </div>
         <div class="col-sm-8">
