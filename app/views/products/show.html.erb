@@ -1,0 +1,77 @@
+<body style="background-color:lightcyan;">
+<style>
+  table, th {
+    border:5px solid black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  tr, td
+  {
+    text-align: center;
+    vertical-align: center;
+    border:1px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+</style>
+
+<br>
+<div><center>
+  <%= link_to "Edit this product", edit_product_path(@product),class: "btn btn-xlarge btn-primary" %>
+  <%= link_to "Check Another Product", new_product_path, class: "btn btn-xlarge btn-warning"%>
+  <%= link_to "Back to Allergens List", allergens_path, class: "btn btn-xlarge btn-info" %>
+
+  <br>
+
+  <h1><strong><%= @product.name %></strong></h1>
+</center></div>
+
+<br>
+
+<table><center>
+
+  <!-- Heading: Check if product's ingredients cause an allergic reaction -->
+  <% if @product.causes_reaction.empty? %>
+    <tr style="background-color:palegreen;">
+      <th>
+        <h2 style="color:black;"><strong>No Allergens Found</strong></h2>
+      </th>
+    </tr>
+  <% else %>
+    <tr style="background-color:lightcoral;">
+      <th>
+        <h2 style="color:black;"><strong>Allergens Found</strong></h2>
+      </th>
+    </tr>
+  <% end %>
+
+  <!-- display each product ingredient -->
+  <% @product.get_ingredients.each do |current_ingredient| %>
+    <!-- check if ingredient for this product is in Reaction db -->
+    <% ingredient_search_results = search_all_reactions(current_ingredient) %>
+    <!-- if ingredient causes reaction -->
+    <% unless ingredient_search_results.empty? %>
+      <tr style="background-color:lightcoral;">
+        <td style=" padding-bottom: 10px;">
+          <strong><h5>
+          <%= current_ingredient %></h5></strong>
+          <% reactive_allergens = Allergen.find(ingredient_search_results.pluck(:allergen_id)) %>
+          <%= render partial: 'product_allergen', collection: reactive_allergens, :locals => {search_item: current_ingredient}  %>
+        </td>
+      </tr>
+    <% else %>
+      <!-- ingredient does not cause a reaction -->
+      <tr style="background-color:palegreen;">
+        <td>
+          <strong><h5>
+            <%= current_ingredient %></h5></strong>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+
+</center></table>
+</body>
+<br>
+

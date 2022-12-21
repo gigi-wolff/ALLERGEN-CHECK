@@ -1,0 +1,19 @@
+<h1>Products</h1>
+<div>
+  <div>
+    <table>
+      <tr>
+        <th>Ingredients</th>
+      </tr>
+      <%= render partial: 'shared/product', collection: @products, :locals => {index_view: true, :search_item=>""}  %>
+    </table>
+
+    <div>
+      <%= link_to "Add Product", new_product_path %>
+      <%= link_to "Back to Allergen list", allergens_path %>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+

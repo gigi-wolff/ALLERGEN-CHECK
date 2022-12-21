@@ -1,0 +1,15 @@
+
+<% substances = product_allergen.get_substances %>
+
+<!-- Panel displaying allergen and substances -->
+<div style="font-size:x-small; background-color:lightpink;">
+  <u><i>
+    (<%= product_allergen.category %>)   
+  </i></u>
+
+  <% substances.each do |substance| %> 
+    <% if substance.upcase.include?(search_item.upcase)%> 
+        <li><%= highlight(substance, search_item) %></li>
+    <% end %>  
+  <% end %>
+</div>

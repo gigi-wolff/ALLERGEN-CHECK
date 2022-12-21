@@ -1,0 +1,632 @@
+Started GET "/" for ::1 at 2022-12-21 14:49:28 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AllergensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering allergens/index.html.erb within layouts/application
+  [1m[36mAllergen Load (1.0ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens"[0m
+  ↳ app/views/allergens/index.html.erb:13
+  Rendered collection of shared/_allergen.html.erb [13 times] (Duration: 20.9ms | Allocations: 43852)
+  Rendered allergens/index.html.erb within layouts/application (Duration: 30.8ms | Allocations: 49172)
+  Rendered layouts/_messages.html.erb (Duration: 0.4ms | Allocations: 169)
+  Rendered layout layouts/application.html.erb (Duration: 58.0ms | Allocations: 77016)
+Completed 200 OK in 63ms (Views: 52.7ms | ActiveRecord: 6.4ms | Allocations: 82311)
+
+
+Started GET "/products/new" for ::1 at 2022-12-21 14:49:31 -0500
+Processing by ProductsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering products/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (Duration: 0.6ms | Allocations: 214)
+  Rendered products/_form.html.erb (Duration: 9.6ms | Allocations: 3095)
+  Rendered products/new.html.erb within layouts/application (Duration: 12.6ms | Allocations: 3716)
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 17.2ms | Allocations: 7713)
+Completed 200 OK in 32ms (Views: 19.0ms | ActiveRecord: 3.1ms | Allocations: 12183)
+
+
+Started POST "/products" for ::1 at 2022-12-21 14:49:56 -0500
+Processing by ProductsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"name"=>"", "ingredients"=>"Water (Aqua), Cetearyl Alcohol, Dimethicone, Stearamidopropyl Dimethylamine, Hydrolyzed Elastin, Hydrolyzed Keratin, Hydrolyzed Wheat Protein, Hydrolyzed Caviar Extract, Behentrimonium Chloride, Fragrance (Parfum), Dipropylene Glycol, Lactic Acid, Amodimethicone, Trehalose, Gluconolactone, Cocos Nucifera (Coconut) Oil, Potassium Chloride, DMDM Hydantoin, Disodium EDTA, PEG-7 Propylheptyl Ether, Cetrimonium Chloride, Hydrolyzed Actin, Adipic Acid, Sodium Sulfate, Hydrolyzed Roe, Fucus Vesiculosus Extract, Methylchloroisothiazolinone, Methylisothiazolinone.\n\n"}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mProduct Load (0.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mReaction Load (1.1ms)[0m  [1m[34mSELECT "reactions".* FROM "reactions" WHERE "reactions"."product_id" = $1[0m  [["product_id", 21]]
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mReaction Destroy (1.3ms)[0m  [1m[31mDELETE FROM "reactions" WHERE "reactions"."id" = $1[0m  [["id", 33]]
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mProduct Destroy (0.3ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = $1[0m  [["id", 21]]
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mProduct Create (0.6ms)[0m  [1m[32mINSERT INTO "products" ("name", "ingredients", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", ""], ["ingredients", "Water (Aqua), Cetearyl Alcohol, Dimethicone, Stearamidopropyl Dimethylamine, Hydrolyzed Elastin, Hydrolyzed Keratin, Hydrolyzed Wheat Protein, Hydrolyzed Caviar Extract, Behentrimonium Chloride, Fragrance (Parfum), Dipropylene Glycol, Lactic Acid, Amodimethicone, Trehalose, Gluconolactone, Cocos Nucifera (Coconut) Oil, Potassium Chloride, DMDM Hydantoin, Disodium EDTA, PEG-7 Propylheptyl Ether, Cetrimonium Chloride, Hydrolyzed Actin, Adipic Acid, Sodium Sulfate, Hydrolyzed Roe, Fucus Vesiculosus Extract, Methylchloroisothiazolinone, Methylisothiazolinone.\n\n"], ["created_at", "2022-12-21 19:49:56.813525"], ["updated_at", "2022-12-21 19:49:56.813525"]]
+  ↳ app/controllers/products_controller.rb:49:in `create'
+  [1m[36mReaction Load (0.1ms)[0m  [1m[34mSELECT "reactions".* FROM "reactions"[0m
+  ↳ app/models/product.rb:60:in `block in <class:Product>'
+  [1m[36mAllergen Load (0.3ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.4ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.3ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.3ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.4ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mReaction Create (0.5ms)[0m  [1m[32mINSERT INTO "reactions" ("allergen_id", "product_id", "reactive_substances", "reactive_ingredient", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["allergen_id", 5], ["product_id", 22], ["reactive_substances", " dimethyl-dimethyl DMDM hydantoin (Glydant)"], ["reactive_ingredient", "DMDM HYDANTOIN"], ["created_at", "2022-12-21 19:49:56.909921"], ["updated_at", "2022-12-21 19:49:56.909921"]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mReaction Create (0.3ms)[0m  [1m[32mINSERT INTO "reactions" ("allergen_id", "product_id", "reactive_substances", "reactive_ingredient", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["allergen_id", 12], ["product_id", 22], ["reactive_substances", "chloromethylisothiazolinone , methylisothiazolinone "], ["reactive_ingredient", "METHYLISOTHIAZOLINONE"], ["created_at", "2022-12-21 19:49:56.928588"], ["updated_at", "2022-12-21 19:49:56.928588"]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/products_controller.rb:49:in `create'
+Redirected to http://localhost:3000/products/22
+Completed 302 Found in 122ms (ActiveRecord: 18.1ms | Allocations: 91917)
+
+
+Started GET "/products/22" for ::1 at 2022-12-21 14:49:56 -0500
+Processing by ProductsController#show as TURBO_STREAM
+  Parameters: {"id"=>"22"}
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:99:in `set_product'
+  Rendering layout layouts/application.html.erb
+  Rendering products/show.html.erb within layouts/application
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE "reactions"."product_id" = $1 LIMIT $2[0m  [["product_id", 22], ["LIMIT", 1]]
+  ↳ app/models/product.rb:25:in `causes_reaction'
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (product_id = 22) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:35
+  [1m[36mReaction Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Water (Aqua)' OR reactive_substances ILIKE 'Water (Aqua)') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cetearyl Alcohol' OR reactive_substances ILIKE 'Cetearyl Alcohol') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Dimethicone' OR reactive_substances ILIKE 'Dimethicone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Stearamidopropyl Dimethylamine' OR reactive_substances ILIKE 'Stearamidopropyl Dimethylamine') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Elastin' OR reactive_substances ILIKE 'Hydrolyzed Elastin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Keratin' OR reactive_substances ILIKE 'Hydrolyzed Keratin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Wheat Protein' OR reactive_substances ILIKE 'Hydrolyzed Wheat Protein') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Caviar Extract' OR reactive_substances ILIKE 'Hydrolyzed Caviar Extract') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Behentrimonium Chloride' OR reactive_substances ILIKE 'Behentrimonium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Fragrance (Parfum)' OR reactive_substances ILIKE 'Fragrance (Parfum)') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Dipropylene Glycol' OR reactive_substances ILIKE 'Dipropylene Glycol') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Lactic Acid' OR reactive_substances ILIKE 'Lactic Acid') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Amodimethicone' OR reactive_substances ILIKE 'Amodimethicone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Trehalose' OR reactive_substances ILIKE 'Trehalose') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Gluconolactone' OR reactive_substances ILIKE 'Gluconolactone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cocos Nucifera (Coconut) Oil' OR reactive_substances ILIKE 'Cocos Nucifera (Coconut) Oil') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Potassium Chloride' OR reactive_substances ILIKE 'Potassium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'DMDM Hydantoin' OR reactive_substances ILIKE 'DMDM Hydantoin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Pluck (0.1ms)[0m  [1m[34mSELECT "reactions"."allergen_id" FROM "reactions" WHERE (reactive_ingredient ILIKE 'DMDM Hydantoin' OR reactive_substances ILIKE 'DMDM Hydantoin')[0m
+  ↳ app/views/products/show.html.erb:59
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" WHERE "allergens"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:59
+  Rendered collection of products/_product_allergen.html.erb [1 times] (Duration: 0.7ms | Allocations: 489)
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Disodium EDTA' OR reactive_substances ILIKE 'Disodium EDTA') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'PEG-7 Propylheptyl Ether' OR reactive_substances ILIKE 'PEG-7 Propylheptyl Ether') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cetrimonium Chloride' OR reactive_substances ILIKE 'Cetrimonium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Actin' OR reactive_substances ILIKE 'Hydrolyzed Actin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Adipic Acid' OR reactive_substances ILIKE 'Adipic Acid') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Sodium Sulfate' OR reactive_substances ILIKE 'Sodium Sulfate') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Roe' OR reactive_substances ILIKE 'Hydrolyzed Roe') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Fucus Vesiculosus Extract' OR reactive_substances ILIKE 'Fucus Vesiculosus Extract') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylchloroisothiazolinone' OR reactive_substances ILIKE 'Methylchloroisothiazolinone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylisothiazolinone' OR reactive_substances ILIKE 'Methylisothiazolinone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Pluck (0.2ms)[0m  [1m[34mSELECT "reactions"."allergen_id" FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylisothiazolinone' OR reactive_substances ILIKE 'Methylisothiazolinone')[0m
+  ↳ app/views/products/show.html.erb:59
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" WHERE "allergens"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:59
+  Rendered collection of products/_product_allergen.html.erb [1 times] (Duration: 0.3ms | Allocations: 333)
+  Rendered products/show.html.erb within layouts/application (Duration: 17.9ms | Allocations: 21627)
+  Rendered layouts/_messages.html.erb (Duration: 0.0ms | Allocations: 25)
+  Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 25796)
+Completed 200 OK in 22ms (Views: 14.2ms | ActiveRecord: 6.7ms | Allocations: 27312)
+
+
+Started GET "/allergens" for ::1 at 2022-12-21 14:50:07 -0500
+Processing by AllergensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering allergens/index.html.erb within layouts/application
+  [1m[36mAllergen Load (0.5ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens"[0m
+  ↳ app/views/allergens/index.html.erb:13
+  Rendered collection of shared/_allergen.html.erb [13 times] (Duration: 43.7ms | Allocations: 43247)
+  Rendered allergens/index.html.erb within layouts/application (Duration: 48.2ms | Allocations: 44180)
+  Rendered layouts/_messages.html.erb (Duration: 0.0ms | Allocations: 21)
+  Rendered layout layouts/application.html.erb (Duration: 51.8ms | Allocations: 48150)
+Completed 200 OK in 54ms (Views: 52.0ms | ActiveRecord: 0.5ms | Allocations: 48433)
+
+
+Started GET "/" for ::1 at 2022-12-21 15:26:39 -0500
+  
+ActiveRecord::NoDatabaseError (We could not find your database: allergen_check_developement. Which can be found in the database configuration file located at config/database.yml.
+
+To resolve this issue:
+
+- Did you create the database for this app, or delete it? You may need to create your database.
+- Has the database name changed? Check your database.yml config has the correct database name.
+
+To create your database, run:
+
+        bin/rails db:create
+):
+  
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:81:in `rescue in new_client'
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:77:in `new_client'
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:656:in `public_send'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:656:in `new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:700:in `checkout_new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:679:in `try_to_checkout_new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:640:in `acquire_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:341:in `checkout'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:181:in `connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_handler.rb:211:in `retrieve_connection'
+activerecord (7.0.4) lib/active_record/connection_handling.rb:313:in `retrieve_connection'
+activerecord (7.0.4) lib/active_record/connection_handling.rb:280:in `connection'
+activerecord (7.0.4) lib/active_record/migration.rb:613:in `connection'
+activerecord (7.0.4) lib/active_record/migration.rb:608:in `build_watcher'
+activerecord (7.0.4) lib/active_record/migration.rb:590:in `block in call'
+activerecord (7.0.4) lib/active_record/migration.rb:589:in `synchronize'
+activerecord (7.0.4) lib/active_record/migration.rb:589:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/" for ::1 at 2022-12-21 15:26:39 -0500
+  
+ActiveRecord::NoDatabaseError (We could not find your database: allergen_check_developement. Which can be found in the database configuration file located at config/database.yml.
+
+To resolve this issue:
+
+- Did you create the database for this app, or delete it? You may need to create your database.
+- Has the database name changed? Check your database.yml config has the correct database name.
+
+To create your database, run:
+
+        bin/rails db:create
+):
+  
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:81:in `rescue in new_client'
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:77:in `new_client'
+activerecord (7.0.4) lib/active_record/connection_adapters/postgresql_adapter.rb:37:in `postgresql_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:656:in `public_send'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:656:in `new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:700:in `checkout_new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:679:in `try_to_checkout_new_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:640:in `acquire_connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:341:in `checkout'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_pool.rb:181:in `connection'
+activerecord (7.0.4) lib/active_record/connection_adapters/abstract/connection_handler.rb:211:in `retrieve_connection'
+activerecord (7.0.4) lib/active_record/connection_handling.rb:313:in `retrieve_connection'
+activerecord (7.0.4) lib/active_record/connection_handling.rb:280:in `connection'
+activerecord (7.0.4) lib/active_record/migration.rb:613:in `connection'
+activerecord (7.0.4) lib/active_record/migration.rb:608:in `build_watcher'
+activerecord (7.0.4) lib/active_record/migration.rb:590:in `block in call'
+activerecord (7.0.4) lib/active_record/migration.rb:589:in `synchronize'
+activerecord (7.0.4) lib/active_record/migration.rb:589:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.4) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.4) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+web-console (4.2.0) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.0) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.4) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.4) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.4) lib/rails/rack/logger.rb:25:in `call'
+sprockets-rails (3.4.2) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.4) lib/rack/method_override.rb:24:in `call'
+rack (2.2.4) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.4) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.4) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.4) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.4) lib/rails/engine.rb:530:in `call'
+puma (5.6.5) lib/puma/configuration.rb:252:in `call'
+puma (5.6.5) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.5) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.5) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.5) lib/puma/server.rb:443:in `process_client'
+puma (5.6.5) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+  [1m[35m (125.4ms)[0m  [1m[35mCREATE DATABASE "allergen_check_developement" ENCODING = 'unicode'[0m
+  [1m[35m (41.7ms)[0m  [1m[35mCREATE DATABASE "allergen_check_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "allergens" CASCADE[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "allergens" ("id" bigserial primary key, "category" character varying, "substances" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "ingredients" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "reactions" CASCADE[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "reactions" ("id" bigserial primary key, "allergen_id" integer, "product_id" integer, "reactive_substances" text, "reactive_ingredient" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221213205917)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20221212013714),
+(20221213205846);
+
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-12-21 20:27:17.534577"], ["updated_at", "2022-12-21 20:27:17.534577"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "5d2e98bd6b6e69ea0c5671304a26da38d8590b47"], ["created_at", "2022-12-21 20:27:17.537577"], ["updated_at", "2022-12-21 20:27:17.537577"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mDROP TABLE IF EXISTS "allergens" CASCADE[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "allergens" ("id" bigserial primary key, "category" character varying, "substances" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "products" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "ingredients" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "reactions" CASCADE[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "reactions" ("id" bigserial primary key, "allergen_id" integer, "product_id" integer, "reactive_substances" text, "reactive_ingredient" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221213205917)[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20221212013714),
+(20221213205846);
+
+[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-12-21 20:27:17.556096"], ["updated_at", "2022-12-21 20:27:17.556096"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.1ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2022-12-21 20:27:17.557888"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "5d2e98bd6b6e69ea0c5671304a26da38d8590b47"], ["created_at", "2022-12-21 20:27:17.559522"], ["updated_at", "2022-12-21 20:27:17.559522"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.2ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Dodecyl gallate"], ["substances", "4-10-00-02006 (Beilstein Handbook Reference) ;BRN 2701981 ;Benzoic acid, 3,4,5-trihydroxy-, dodecyl ester ;CCRIS 5568 ;Dodecyl 3,4,5-trihydroxybenzoate ;Dodecyl gallate ;Dodecylester kyseliny gallove ;Dodecylester kyseliny gallove [Czech] ;EINECS 214-620-6 ;Gallic acid, dodecyl ester ;Gallic acid, lauryl ester ;Lauryl 3,4,5-trihydroxybenzoate ;Lauryl gallate ;NSC 133463 ;Nipagallin LA ;Progallin LA"], ["created_at", "2022-12-21 20:27:17.577072"], ["updated_at", "2022-12-21 20:27:17.577072"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Tosylamide/Formaldehyde Resin"], ["substances", "4-Toluenesulfonamide-formaldehyde resin ;Benzenesulfonamide, 4-methyl-, polymer with formaldehyde ;Tosylamide/formaldehyde resin ;Santolite MS ;Santolite MHP"], ["created_at", "2022-12-21 20:27:17.578659"], ["updated_at", "2022-12-21 20:27:17.578659"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "1,3,5-tris(2-hydroxyethyl)-hexahydrotriazine"], ["substances", "1,3,5-Tris(2-hydroxyethyl)hexahydro- 1,3,5-triazine ;1,3,5-Tris(2-hydroxyethyl)hexahydro-striazine ;4-26-00-00010 (Beilstein Handbook Reference) ;Actane ;BRN 0124982 ;Busan 1060 ;CCRIS 6246 ;Caswell No. 481C ;EINECS 225-208-0 ;EPA Pesticide Chemical Code 083301 ;ETA 75 ;Grotan ;Grotan B ;Grotan BK ;Grotan HD ;Hexahydro-1,3,5-triazine-1,3,5-triethanol ;Hexahydro-1,3,5-tris(2-hydroxyethyl)-striazine ;Hexahydro-1,3,5-tris(hydroxyethyl)triazine ;KM 200 (alcohol) ;Kalpur TE ;NSC 516387 ;Onyxide 200 ;Ottaform 204 ;Rancidity control agent ;Roksol T 1-7"], ["created_at", "2022-12-21 20:27:17.579827"], ["updated_at", "2022-12-21 20:27:17.579827"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Urea formaldehyde resin"], ["substances", "Formaldehyde, urea polymer ;Gabrite ;HSDB 7203 ;Hygromull ;KM 2 (Polymer) ;Karbamol ;Karbamol B/M ;Kauresin K244 ;Kaurit 285 FL ;Kaurit 420 ;PR 703-78 ;Pianizol ;Piatherm ;Piatherm D ;Plastopal BT ;Plyamine HD 1129A ;Plyamine P 364BL ;Poly(methi(bis(hydroxymethyl))ureylene) amer ;Polynoxylin ;Ponoxylan ;Resamin 155F ;Resamin HW 505 ;Resina X ;S-Resin AER 20 ;Uformite 700 ;Uformite F 240N ;Uloid 100 ;Uloid 22 ;Urea formaldehyde polymer ;Urea formaldehyde resin ;Urea, paraformaldehyde polymer ;Urea, polymer with 1-butanol and formaldehyde ;Urea, polymer with formaldehyde"], ["created_at", "2022-12-21 20:27:17.581023"], ["updated_at", "2022-12-21 20:27:17.581023"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.3ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Formaldehyde"], ["substances", "Formaldehyde ;Formalin ;Formic aldehyde ;Methaldehyde ;Methyl aldehyde ;Methylene oxide ;Methanal ;Oxymethylene;Quaternium-15;Diazolidinyl urea (Germall® II); dimethyl-dimethyl DMDM hydantoin (Glydant);Imidazolidinyl urea (Germall®);2-bromo-2-nitropropane-1,3-diol (Bronopol);Tris nitromethane (Tris Nitro)(industrial biocide) ;sodium hydroxymethylglycinate ;2-bromo-2-nitropropane-1,3-diol (bromopol)"], ["created_at", "2022-12-21 20:27:17.582227"], ["updated_at", "2022-12-21 20:27:17.582227"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Hexamethylenetetramine"], ["substances", "1,3,5,7-Tetraazaadamantane ;1,3,5,7-Tetraazatricyclo(3.3.1.1(3,7))decane ;1,3,5,7-Tetraazatricyclo(3.3.1.1(sup 3,7))decane ;1,3,5,7-Tetraazatricyclo(3.3.1.1(sup 37))decane ;AI3-09611 ;Aceto HMT ;Aminoform ;Aminoformaldehyde ;Ammoform ;Ammonioformaldehyde ;Antihydral ;CCRIS 2297 ;Caswell No. 482 ;Cystamin ;Cystogen ;Duirexol ;EINECS 202-905-8 ;EPA Pesticide Chemical Code 45501 ;Ekagom H ;Esametilentetramina ;Esametilentetramina [Italian] ;Formamine ;Formin ;Formin (heterocycle) ;HMT ;HSDB 563 ;Herax UTS ;Heterin ;Hexa (vulcanization accelerator) ;Hexa-Flo-Pulver ;Hexaform ;Hexaloids ;Hexamethylenamine ;Hexamethyleneamine ;Hexamethylenetetraamine ;Hexamethylenetetramine ;Hexamethylenetetraminum ;Hexamethylentetramin ;Hexamethylentetramin [German] ;Hexamethylentetramine ;Hexamethylentetraminum ;Hexamine ;Hexamine (heterocycle) ;Hexaminum ;Hexasan ;Hexasan (VAN) ;Hexilmethylenamine ;Metenamina ;Metenamina [INN-Spanish] ;Methenamin ;Methenamine ;Methenaminum ;Methenaminum [INN-Latin] ;Metramine ;NSC 26346 ;NSC 403347 ;Nocceler H ;Preparation AF ;Resotropin ;S 4 (heterocycle) ;Sanceler H ;Uramin ;Uratrine ;Uritone ;Urodeine ;Urotropin ;Urotropine ;Vulkacit H 30 ;Xametrin"], ["created_at", "2022-12-21 20:27:17.583625"], ["updated_at", "2022-12-21 20:27:17.583625"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Dimethylaminopropylamine (DMAPA)"], ["substances", "1,3-Propanediamine, N,N-dimethyl- ;1-(Dimethylamino)-3-aminopropane ;1-Amino-3-dimethylaminopropane ;3-(Dimethylamino)-1-propanamine ;3-(Dimethylamino)-1-propylamine ;3-(Dimethylamino)propylamine ;3-Amino-1-(dimethylamino)propane ;4-04-00-01259 (Beilstein Handbook Reference) ;AI3-25441 ;BRN 0605293 ;CCRIS 4799 ;EINECS 203-680-9 ;HSDB 5391 ;N,N-Dimethyl-1,3-diaminopropane ;N,N-Dimethyl-1,3-propanediamine ;N,N-Dimethyl-1,3-propylenediamine ;N,N-Dimethyl-N-(3-aminopropyl)amine ;N,N-Dimethylpropylenediamine ;N,N-Dimethyltrimethylenediamine ;N-Dimethyltrimethylenediamine ;NSC 1067 ;Propylamine, 3-(N,N-dimethylamino)- ;gamma-(Dimethylamino)propylamin"], ["created_at", "2022-12-21 20:27:17.585033"], ["updated_at", "2022-12-21 20:27:17.585033"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "4,4'-diaminodiphenyl methane"], ["substances", "4,4'-Diaminodiphenylmethan ;4,4'-Diaminodiphenylmethan [German] ;4,4'-Diaminodiphenylmethane ;4,4'-Dimethylenediamine ;4,4'-Diphenylmethanediamine ;4,4'-Methylenebis(benzeneamine) ;4,4'-Methylenebisaniline ;4,4'-Methylenedianiline ;4-(4-Aminobenzyl)aniline ;4-13-00-00390 (Beilstein Handbook Reference) ;AI3-02615 ;Ancamine TL ;Aniline, 4,4'-methylenedi- ;Araldite hardener 972 ;Avaldite HT 972 ;BRN 0474706 ;Benzenamine, 4,4'-methylenebis- ;Bis(4-aminophenyl)methane ;Bis(p-aminophenyl)methane ;Bis-p-aminofenylmethan ;Bis-p-aminofenylmethan [Czech] ;CCRIS 1010 ;Curithane ;Dadpm ;Di-(4-aminophenyl)methane ;Diaminodiphenylmethane ;Dianilinemethane ;Dianilinomethane ;EINECS 202-974-4 ;Epicure DDM ;Epikure DDM ;HSDB 2541 ;HT 972 ;Jeffamine AP-20 ;MDA ;Methylenebis(aniline) ;Methylenedianiline ;Methylenedianiline (VAN) ;NCI-C54604 ;NSC 4709 ;Sumicure M ;Tonox ;p,p'-Diaminodifenylmethan ;p,p'-Diaminodifenylmethan [Czech] ;p,p'-Diaminodiphenylmethane ;p,p'-Methylenedianiline ;p-Toluidine, alpha-(p-aminophenyl)-"], ["created_at", "2022-12-21 20:27:17.586215"], ["updated_at", "2022-12-21 20:27:17.586215"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Fragrance Mix II"], ["substances", "2H-1-Benzopyran-2-one ;Coumarin [NF X] ;Tonka bean camphor ;1,2-Benzopyrone ;2-Oxo-1,2-benzopyran ;2-Propenoic acid, 3-(2-hydroxyphenyl)-, delta-lactone ;2-Propenoic acid, 3-(2-hydroxyphenyl)-delta-lactone ;2H-1-Benzopyran, 2-oxo- ;2H-1-Benzopyran-2-one ;2H-Benzo(b)pyran-2-one ;3-(2-Hydroxyphenyl)-2-propenoic delta-lactone ;5,6-Benzo-alpha-pyrone ;5-17-10-00143 (Beilstein Handbook Reference) ;AI3-00753 ;Alpha-hexylcinnamic aldehyde ;BRN 0383644 ;Benzo-alpha-pyrone ;CCRIS 181 ;Caswell No. 259C ;Cinnamic acid, o-hydroxy-, delta-lactone ;Citral ;Coumarin ;Coumarinic anhydride ;Coumarinic lactone ;Cumarin ;EINECS 202-086-7 ;EPA Pesticide Chemical Code 127301 ;Farnesol ;Lyral ;Rattex ;Tonka bean camphor ;cis-o-Coumaric acid anhydride ;cis-o-Coumarinic acid lactone ;o-Coumaric acid lactone ;o-Hydroxycinnamic acid lactone ;o-Hydroxycinnamic lactone ;4-(4-Hydroxy-4-methylpentyl)-3-cyclohexene-1-carboxaldehyde ;BRN 2046455 ;EINECS 250-863-4 ;3-Cyclohexene-1-carboxaldehyde, 4-(4-hydroxy-4-methylpentyl)- ;4-(4-Hydroxy-4-methylpentyl)cyclohex-3-enecarbaldehyde ;3-Cyclohexene-1-carboxaldehyde, 4-(4-hydroxy-4-methylpentyl)- ;2,6-Dimethyl-2-octen-8-ol ;3,7-Dimethyl-6-octen-1-ol ;4-01-00-02188 (Beilstein Handbook Reference) ;AI3-25080 ;BRN 1721507 ;CCRIS 7452 ;Cephrol ;Citronellol (ex. Java citronella oil) (natural) ;Citronellol (natural) ;EINECS 203-375-0 ;Elenol ;FEMA No. 2309 ;NSC 8779 ;Rhodinol ;Rodinol ;2,6,10-Dodecatrien-1-ol, 3,7,11-trimethyl- ;3,7,11-Trimethyl-2,6,10-dodecatrienol ;3,7,11-Trimethyl-2,6,10-dodecatrien-1-ol ;Trimethyl dodecatrienol"], ["created_at", "2022-12-21 20:27:17.587394"], ["updated_at", "2022-12-21 20:27:17.587394"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Disperse Orange-3"], ["substances", "EINECS 211-984-8 ;Orange 3"], ["created_at", "2022-12-21 20:27:17.588572"], ["updated_at", "2022-12-21 20:27:17.588572"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "P-phenylenediamine"], ["substances", "1,4-Benzenediamine, 2-methyl- ;2,5-Diaminotoluene ;2-Methyl-1,4-benzenediamine ;2-Methyl-p-phenylenediamine ;2-Methyl-para-phenylenediamine ;4-13-00-00246 (Beilstein Handbook Reference) ;4-Amino-2-methylaniline ;BRN 0774521 ;C.I. 76042 ;CCRIS 7693 ;CI 76042 ;EINECS 202-442-1 ;HSDB 6251 ;Toluene-2,5-diamine ;Toluylene-2,5-diamine ;p,m-Tolylenediamine ;p-Toluenediamine ;p-Toluylendiamine ;para-Toluenediamine ;para-Toluylenediamine ;para-Tolylenediamine"], ["created_at", "2022-12-21 20:27:17.589722"], ["updated_at", "2022-12-21 20:27:17.589722"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.1ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "Preservatives"], ["substances", "benzoisothiazolinone ;isothiazolinone ;chloromethylisothiazolinone ;methylisothiazolinone ;benzisothiazolinone ;octylisothiazolinone"], ["created_at", "2022-12-21 20:27:17.590877"], ["updated_at", "2022-12-21 20:27:17.590877"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAllergen Create (0.2ms)[0m  [1m[32mINSERT INTO "allergens" ("category", "substances", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["category", "4-(4-hydroxy-4-methyl pentyl)-3-cyclohexene-1- carboxaldehyde (Lyral)"], ["substances", "4-(4-Hydroxy-4-methylpentyl)-3-cyclohexene-1-carboxaldehyde ;BRN 2046455 ;EINECS 250-863-4 ;Lyral"], ["created_at", "2022-12-21 20:27:17.592033"], ["updated_at", "2022-12-21 20:27:17.592033"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2022-12-21 15:27:26 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AllergensController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering allergens/index.html.erb within layouts/application
+  [1m[36mAllergen Load (0.8ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens"[0m
+  ↳ app/views/allergens/index.html.erb:13
+  Rendered collection of shared/_allergen.html.erb [13 times] (Duration: 19.7ms | Allocations: 43855)
+  Rendered allergens/index.html.erb within layouts/application (Duration: 30.9ms | Allocations: 49190)
+  Rendered layouts/_messages.html.erb (Duration: 0.4ms | Allocations: 166)
+  Rendered layout layouts/application.html.erb (Duration: 52.6ms | Allocations: 76703)
+Completed 200 OK in 85ms (Views: 47.0ms | ActiveRecord: 6.9ms | Allocations: 81997)
+
+
+Started GET "/products/new" for ::1 at 2022-12-21 15:27:31 -0500
+Processing by ProductsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering products/new.html.erb within layouts/application
+  Rendered shared/_errors.html.erb (Duration: 0.4ms | Allocations: 214)
+  Rendered products/_form.html.erb (Duration: 11.0ms | Allocations: 3176)
+  Rendered products/new.html.erb within layouts/application (Duration: 12.3ms | Allocations: 3797)
+  Rendered layouts/_messages.html.erb (Duration: 0.0ms | Allocations: 31)
+  Rendered layout layouts/application.html.erb (Duration: 16.0ms | Allocations: 7846)
+Completed 200 OK in 26ms (Views: 16.9ms | ActiveRecord: 2.4ms | Allocations: 12465)
+
+
+Started POST "/products" for ::1 at 2022-12-21 15:27:48 -0500
+Processing by ProductsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "product"=>{"name"=>"", "ingredients"=>"Water (Aqua), Cetearyl Alcohol, Dimethicone, Stearamidopropyl Dimethylamine, Hydrolyzed Elastin, Hydrolyzed Keratin, Hydrolyzed Wheat Protein, Hydrolyzed Caviar Extract, Behentrimonium Chloride, Fragrance (Parfum), Dipropylene Glycol, Lactic Acid, Amodimethicone, Trehalose, Gluconolactone, Cocos Nucifera (Coconut) Oil, Potassium Chloride, DMDM Hydantoin, Disodium EDTA, PEG-7 Propylheptyl Ether, Cetrimonium Chloride, Hydrolyzed Actin, Adipic Acid, Sodium Sulfate, Hydrolyzed Roe, Fucus Vesiculosus Extract, Methylchloroisothiazolinone, Methylisothiazolinone.\n\n"}, "commit"=>"Submit"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/models/product.rb:54:in `block in <class:Product>'
+  [1m[36mProduct Create (0.8ms)[0m  [1m[32mINSERT INTO "products" ("name", "ingredients", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", ""], ["ingredients", "Water (Aqua), Cetearyl Alcohol, Dimethicone, Stearamidopropyl Dimethylamine, Hydrolyzed Elastin, Hydrolyzed Keratin, Hydrolyzed Wheat Protein, Hydrolyzed Caviar Extract, Behentrimonium Chloride, Fragrance (Parfum), Dipropylene Glycol, Lactic Acid, Amodimethicone, Trehalose, Gluconolactone, Cocos Nucifera (Coconut) Oil, Potassium Chloride, DMDM Hydantoin, Disodium EDTA, PEG-7 Propylheptyl Ether, Cetrimonium Chloride, Hydrolyzed Actin, Adipic Acid, Sodium Sulfate, Hydrolyzed Roe, Fucus Vesiculosus Extract, Methylchloroisothiazolinone, Methylisothiazolinone.\n\n"], ["created_at", "2022-12-21 20:27:48.260461"], ["updated_at", "2022-12-21 20:27:48.260461"]]
+  ↳ app/controllers/products_controller.rb:49:in `create'
+  [1m[36mReaction Load (0.6ms)[0m  [1m[34mSELECT "reactions".* FROM "reactions"[0m
+  ↳ app/models/product.rb:60:in `block in <class:Product>'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.3ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.3ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.4ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mReaction Create (0.6ms)[0m  [1m[32mINSERT INTO "reactions" ("allergen_id", "product_id", "reactive_substances", "reactive_ingredient", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["allergen_id", 5], ["product_id", 1], ["reactive_substances", " dimethyl-dimethyl DMDM hydantoin (Glydant)"], ["reactive_ingredient", "DMDM HYDANTOIN"], ["created_at", "2022-12-21 20:27:48.328973"], ["updated_at", "2022-12-21 20:27:48.328973"]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.8ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" ORDER BY "allergens"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/models/product.rb:38:in `block in check_for_allergens'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mReaction Create (0.3ms)[0m  [1m[32mINSERT INTO "reactions" ("allergen_id", "product_id", "reactive_substances", "reactive_ingredient", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["allergen_id", 12], ["product_id", 1], ["reactive_substances", "chloromethylisothiazolinone , methylisothiazolinone "], ["reactive_ingredient", "METHYLISOTHIAZOLINONE"], ["created_at", "2022-12-21 20:27:48.344501"], ["updated_at", "2022-12-21 20:27:48.344501"]]
+  ↳ app/models/product.rb:43:in `block (2 levels) in check_for_allergens'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/products_controller.rb:49:in `create'
+Redirected to http://localhost:3000/products/1
+Completed 302 Found in 91ms (ActiveRecord: 13.1ms | Allocations: 87863)
+
+
+Started GET "/products/1" for ::1 at 2022-12-21 15:27:48 -0500
+Processing by ProductsController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:99:in `set_product'
+  Rendering layout layouts/application.html.erb
+  Rendering products/show.html.erb within layouts/application
+  [1m[36mReaction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE "reactions"."product_id" = $1 LIMIT $2[0m  [["product_id", 1], ["LIMIT", 1]]
+  ↳ app/models/product.rb:25:in `causes_reaction'
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (product_id = 1) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:35
+  [1m[36mReaction Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Water (Aqua)' OR reactive_substances ILIKE 'Water (Aqua)') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cetearyl Alcohol' OR reactive_substances ILIKE 'Cetearyl Alcohol') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Dimethicone' OR reactive_substances ILIKE 'Dimethicone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Stearamidopropyl Dimethylamine' OR reactive_substances ILIKE 'Stearamidopropyl Dimethylamine') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Elastin' OR reactive_substances ILIKE 'Hydrolyzed Elastin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Keratin' OR reactive_substances ILIKE 'Hydrolyzed Keratin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Wheat Protein' OR reactive_substances ILIKE 'Hydrolyzed Wheat Protein') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Caviar Extract' OR reactive_substances ILIKE 'Hydrolyzed Caviar Extract') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Behentrimonium Chloride' OR reactive_substances ILIKE 'Behentrimonium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Fragrance (Parfum)' OR reactive_substances ILIKE 'Fragrance (Parfum)') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Dipropylene Glycol' OR reactive_substances ILIKE 'Dipropylene Glycol') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Lactic Acid' OR reactive_substances ILIKE 'Lactic Acid') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Amodimethicone' OR reactive_substances ILIKE 'Amodimethicone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Trehalose' OR reactive_substances ILIKE 'Trehalose') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Gluconolactone' OR reactive_substances ILIKE 'Gluconolactone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cocos Nucifera (Coconut) Oil' OR reactive_substances ILIKE 'Cocos Nucifera (Coconut) Oil') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Potassium Chloride' OR reactive_substances ILIKE 'Potassium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'DMDM Hydantoin' OR reactive_substances ILIKE 'DMDM Hydantoin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Pluck (0.1ms)[0m  [1m[34mSELECT "reactions"."allergen_id" FROM "reactions" WHERE (reactive_ingredient ILIKE 'DMDM Hydantoin' OR reactive_substances ILIKE 'DMDM Hydantoin')[0m
+  ↳ app/views/products/show.html.erb:59
+  [1m[36mAllergen Load (0.1ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" WHERE "allergens"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:59
+  Rendered collection of products/_product_allergen.html.erb [1 times] (Duration: 0.6ms | Allocations: 488)
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Disodium EDTA' OR reactive_substances ILIKE 'Disodium EDTA') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'PEG-7 Propylheptyl Ether' OR reactive_substances ILIKE 'PEG-7 Propylheptyl Ether') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Cetrimonium Chloride' OR reactive_substances ILIKE 'Cetrimonium Chloride') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Actin' OR reactive_substances ILIKE 'Hydrolyzed Actin') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Adipic Acid' OR reactive_substances ILIKE 'Adipic Acid') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Sodium Sulfate' OR reactive_substances ILIKE 'Sodium Sulfate') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Hydrolyzed Roe' OR reactive_substances ILIKE 'Hydrolyzed Roe') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Fucus Vesiculosus Extract' OR reactive_substances ILIKE 'Fucus Vesiculosus Extract') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylchloroisothiazolinone' OR reactive_substances ILIKE 'Methylchloroisothiazolinone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylisothiazolinone' OR reactive_substances ILIKE 'Methylisothiazolinone') LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:54
+  [1m[36mReaction Pluck (0.1ms)[0m  [1m[34mSELECT "reactions"."allergen_id" FROM "reactions" WHERE (reactive_ingredient ILIKE 'Methylisothiazolinone' OR reactive_substances ILIKE 'Methylisothiazolinone')[0m
+  ↳ app/views/products/show.html.erb:59
+  [1m[36mAllergen Load (0.2ms)[0m  [1m[34mSELECT "allergens".* FROM "allergens" WHERE "allergens"."id" = $1 LIMIT $2[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/views/products/show.html.erb:59
+  Rendered collection of products/_product_allergen.html.erb [1 times] (Duration: 0.4ms | Allocations: 333)
+  Rendered products/show.html.erb within layouts/application (Duration: 21.5ms | Allocations: 21642)
+  Rendered layouts/_messages.html.erb (Duration: 0.0ms | Allocations: 25)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 25820)
+Completed 200 OK in 27ms (Views: 18.4ms | ActiveRecord: 6.3ms | Allocations: 27336)
+
+

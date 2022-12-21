@@ -1,0 +1,32 @@
+<!-- 
+Model backed form helpers are tied to an object. There has to be a setter method, a virtual attribute or a column in the database, available for that object when using the model backed form helpers. We use model backed form helpers usually when we need to create, edit, or update an object.
+
+By convention, form_for creates a form based on a specific model object. We are able to create, edit, and update that object's attributes. A form can be created by passing form_for a string or symbol relating to the object we want to deal with.
+
+Here, the model-backed form takes an ojbect @product and infers the action and all else based on convention. Form_for checks to see if @product is a new or existing object. If its a new object, it routes the information submitted to the 'create route' by setting action='/products' (uri) and method='post' (verb). This can be seen by using "inspect element" in chrome. In the case that #product is an exsisting object, its is routed to the update route, setting action='/products/id' and method='post' (this works because there is a hidden _method="patch" which converts post to patch for rails to use). The information submitted is stored in a params hash that can be used for mass assignment, in this case "product"=>{"name"=>"some name"}.
+Product.create(params[:post]) is equivalent to Product.create("name"=>"some name")
+
+text_field can to be any attribute (column) or virtual attribute of the product model that is permitted (in products_controller.rb under function 'product_params' is where we set permissions). In the product model, attributes are: id, name, ingredients
+-->
+<%= render 'shared/errors', obj: @product %>
+<div>
+  <!-- there are 12 cols in row, if boxes take up 6 'col-lg-6', then offset by 3 'col-lg-offset-3' on each side will center boxes -->
+  <div>
+    <%= form_for @obj do |f| %>
+      <div>
+        <input id="form-input" class="form-control input-group-lg" autofocus="autofocus" type="text" name="">
+      </div>
+      <div>
+        <div>
+          <textarea id="form-textarea" name="" class="form-control" ></textarea>
+        </div>  
+      </div>
+      <div>
+        <button id="form-button" type="submit" class="btn btn-my-primary btn-xlarge"></button>
+      </div>
+    <% end %>
+    <br>
+    <%= link_to "Cancel request and return to products listing", products_path %> 
+  </div>
+</div>
+

@@ -1,0 +1,43 @@
+ <!-- When a partial is called with a pluralized collection (ie: collection: @allergens), then the individual instances of the partial have access to the member of the collection being rendered via a variable named after the partial (allergen). In general 
+if the partial is called with using "collection: somenames" and partial's name is "some_partial" then to access an individual instance of "somenames" would be "some_partial"-->
+
+<style>
+  table, th {
+    border:5px solid black;
+    background-color: lightcoral;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  td {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    vertical-align: center;
+  }
+</style>
+
+<% substances = allergen.get_substances %>
+<table>
+  <!-- Panel displaying allergen and substances -->
+  <tr>
+    <th>
+      <h4><%= allergen.category %></h4>
+      <h8><%= link_to 'Edit', edit_allergen_path(allergen) %></h8>
+      <h8><%= link_to 'Show', allergen_path(allergen) %></h8>
+      <h8><%= link_to "Delete", allergen_path(allergen), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" } %></h8>
+    </th>
+  </tr>
+  
+    <% substances.each do |substance| %> 
+      <% if substance.upcase.include?(search_item.upcase)%> 
+         <tr style="background-color: pink;">
+          <td>
+            <%= highlight(substance, search_item) %>
+          </td>
+        </tr>
+      <% end %>  
+    <% end %>
+</table>
+<br>
+

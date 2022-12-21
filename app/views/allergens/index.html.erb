@@ -1,0 +1,14 @@
+<body style="background-color:lightcyan;">
+<br>
+<br>
+  <h2><center>
+  <%= link_to "Check a Product", new_product_path, class: "btn btn-xlarge btn-warning"%>
+
+    <%= link_to "Add New Allergen", new_allergen_path,class: "btn btn-xlarge btn-info" %>
+  </center></h2>
+<br>
+
+  <h1><center><strong>Current Allergens</strong></center></h1>
+
+  <%= render partial: "shared/allergen", collection: @allergens, :locals => {search_item: ""} %>
+</body>
