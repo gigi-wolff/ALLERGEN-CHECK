@@ -2,14 +2,14 @@
 <!-- Here, obj must be an active record object. -->
 
 <% if obj.errors.any? %>
-  <div><center>
+  <center><div style="background-color: lightpink; display: inline-block;">
     <h3>
-      <%= pluralize(obj.errors.count, "error") %> prohibited this product from being saved:
+      <%= pluralize(obj.errors.count, "error") %> prohibited this product from being saved/submitted:
     </h3>
       <% obj.errors.full_messages.each do |msg| %>
         <li>
           <%= msg %>
         </li>
       <% end %>
-  </center></div>
+  </div></center>
 <% end %>
