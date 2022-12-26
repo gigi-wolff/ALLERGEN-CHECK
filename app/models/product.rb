@@ -8,8 +8,13 @@ class Product < ApplicationRecord
 
 
   validates :ingredients, presence: true
-  validates :ingredients, format:  {with: /\w+,\s/, :message => 'must be seperated by or end with a comma followed by a space' }
-  validates :ingredients, format: { without: /;/, :message => "contains a ';' which is not a valid character" }
+  #validates :ingredients, format:  {with: /\w+,\s/, :message => 
+  #  "must be seperated by a ', '"}
+  validates :ingredients, format:  {with: /\w+,\s|$\n/, :message => 
+    "must be seperated by a ', ' or a newline (return)"}
+
+  validates :ingredients, format: { without: /;/, :message => 
+    "contains a ';' which is not a valid character" }
 
 
   # The model should be able to answer the question "Can user x do y to this object?"
@@ -20,8 +25,14 @@ class Product < ApplicationRecord
     # get rid of all characters that are not: a-z A-Z 0-9 - [] () ' / , blank;
     clean_ingredients = ingredients.gsub(%r{[^a-zA-Z0-9\-\[\]\,\'\(\)\/\s]}, '')
 
-    #ingredients abc/def should be turned into "abc, def"
+    # ingredients abc/def should be turned into "abc, def"
     clean_ingredients = clean_ingredients.gsub(%r{\/}, ', ')
+    
+    # ingredients a
+    #             b
+    #             c
+    # should be turned into a, b, c
+    clean_ingredients = clean_ingredients.gsub(%r{$\n}, ', ')
 
     return clean_ingredients.split(', ').each { |ingredient| ingredient.strip! }
   end
