@@ -8,10 +8,13 @@ Product.create(params[:post]) is equivalent to Product.create("name"=>"some name
 
 text_field can to be any attribute (column) or virtual attribute of the product model that is permitted (in products_controller.rb under function 'product_params' is where we set permissions). In the product model, attributes are: id, name, ingredients
 -->
+<body style="background-color:lightcyan;">
+
 <div><center>
   <div class='form-horizontal col-lg-6 col-lg-offset-3'>
 
     <%= form_for(@product, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+    <!-- skip Name of Product on this form---------------
       <div class="form-group">
         <div class="col-lg-12">
           <%= f.label :Name %>
@@ -21,12 +24,22 @@ text_field can to be any attribute (column) or virtual attribute of the product 
         </div>
       </div>
       <br>
+      -------------------------------------------------->
       <div class="form-group">
         <div class="col-lg-12">
           <%= f.label :ingredients%>
         </div>
         <div class="col-lg-12">
-          <%= f.text_area :ingredients, id: "form-textarea", class: "form-control", rows: "10", placeholder: "ingredient 1, ingredient 2, ... " %>
+
+
+
+<%= f.text_area :ingredients, id: "form-textarea", class: "form-control", rows: "10", placeholder: 
+"ingredient 1, ingredient 2, ...
+
+ingredient 1
+ingredient 2..." %>
+
+
         </div>
       </div>  
       <br>
@@ -34,4 +47,7 @@ text_field can to be any attribute (column) or virtual attribute of the product 
         <%= link_to "Back to Allergens List", allergens_path, class: "btn btn-xlarge btn-info" %>
     <% end %>
   </div>
-</div></center>
+</center></div>
+</body>
+
+

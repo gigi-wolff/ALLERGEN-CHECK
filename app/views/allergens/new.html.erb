@@ -1,9 +1,15 @@
+<body style="background-color:lightcyan;">
 <h1>
   <center>Add a New Allergen</center>
 </h1>
+
+<small><center>
+  <i><u>Enter ingredients seperated by a ";" (semi-colon) or a newline (return)</u></i>
+</center></small>
 <br>
 
 
 <%= render 'shared/errors', obj: @allergen %>
 <!-- would provide the @allergen object to the partial, available under the local variable obj -->
 <%= render 'form'%>
+</body>

@@ -3,9 +3,9 @@
 
 <% if obj.errors.any? %>
   <center><div style="background-color: lightpink; display: inline-block;">
-    <h3>
+    <h5>
       <%= pluralize(obj.errors.count, "error") %> prohibited this product from being saved/submitted:
-    </h3>
+    </h5>
       <% obj.errors.full_messages.each do |msg| %>
         <li>
           <%= msg %>

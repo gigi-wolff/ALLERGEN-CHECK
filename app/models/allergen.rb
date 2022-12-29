@@ -16,16 +16,46 @@ class Allergen < ApplicationRecord
   #Match any characters as few as possible until a ";" is found, without counting the ";".
   #validates :substances, format: { with: /.+?(?=;)/, :message => "must end with or be seperated by a ';'" }
   #validates :substances, format: { with: /.+?(?=;)/, :message => "must end with or be seperated by a ';'" }
-  validates_format_of :substances, :with => /.+?(?=;)/ ,
-    :message => "must end with or be seperated by a ';'"
+  #validates_format_of :substances, :with => /.+?(?=;)/ ,
+  #  :message => "must end with or be seperated by a ';'"
+  #validates_format_of :substances, :with => /.+?(?=;)|\n/ ,
+  #  :message => "must end with or be seperated by a ';' or a newline (return)"
+  validates_format_of :substances, {:with =>  /.+?(?=;)|.+?(?=\n)/ ,
+    :message => "must end with or be seperated by a ';' or a newline (return)"}
 
-  #remove newline(\n) and return(\r) from substances attribute
+
+  #process user input substance string such that substances are seperated by ";"
   def substances=(value)
-    write_attribute(:substances, value.gsub("\n","").gsub("\r",""))
+    processed_substance_str = process_new_allergen_entry(value)
+    write_attribute(:substances, processed_substance_str)
   end
 
   def get_substances
-    return self.substances.split(';')
+    substances_array = self.substances.split(";")
+    return substances_array
+  end
+
+  def process_new_allergen_entry(substances)
+
+    substance_str = substances
+
+    # if valid input
+    if substances.include?(";") || substances.include?("\n")
+
+      # seperate substances string into array elements using ";" and "newline"
+      substances_array = substances.split(/;|\n/)
+
+      # if only 1 substance in array add a an ";" to the end
+      if substances_array.length == 1 
+        substance_str = substances_array[0] + ";"
+      else
+        # delete any nill or all whitespace entries from array
+        # and create a new string where ";" seperates each substance
+        substance_str = substances_array.delete_if { |substance| substance.blank?}.join(";")
+      end
+    end
+
+    return substance_str
   end
 
   # array of substances match the ingredient
@@ -35,8 +65,11 @@ class Allergen < ApplicationRecord
     matching_substances = self.get_substances.select {|substance| 
         (ingredient.upcase.include?(substance.upcase) || substance.upcase.include?(ingredient.upcase))
       } 
+
+    # matching substances should not inclue any matching whitespaces
+    matching_substances = matching_substances.delete_if { |substance| substance.blank?}
+
     return matching_substances
   end
-
 
 end
